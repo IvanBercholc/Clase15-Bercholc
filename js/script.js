@@ -1,4 +1,5 @@
 "use strict";
+//Tienda online de Rica
 const precioVestido = 5800;
 const precioCancan = 3400;
 const precioPolera = 2700;
