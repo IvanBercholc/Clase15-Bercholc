@@ -4,11 +4,18 @@ const precioVestido = 5800;
 const precioCancan = 3400;
 const precioPolera = 2700;
 const precioConjunto = 13000;
-let carrito=0;
-let talle;
+const Carrito = [];
+class ProductoVenta {
+  constructor(nombre, talle, cantidad, precio) {
+    this.nombre = nombre,
+      this.talle = talle,
+      this.cantidad = cantidad,
+      this.precio = precio
+  }
+}
 let producto = prompt(
-    "Seleccione producto: 'Vestido', 'Cancan', 'Polera' o 'Conjunto'. Escriba 'Comprar' para finalizar compra"
-  ).toUpperCase();
+  "Seleccione producto: 'Vestido', 'Cancan', 'Polera' o 'Conjunto'. Escriba 'Comprar' para finalizar compra"
+).toUpperCase();
 function seleccionarTalle() {
   let talle = prompt("Seleccione talle: 'S', 'M' o 'L'. 'Cancelar' para salir").toUpperCase();
   while (talle != "CANCELAR") {
@@ -25,50 +32,44 @@ function seleccionarTalle() {
     talle = prompt("Seleccione talle: 'S', 'M' o 'L'. 'Cancelar' para salir").toUpperCase();
   }
 }
-function agregarProducto(precio){
+function agregarProducto(precio) {
+  let talle = seleccionarTalle();
+  if (talle != undefined) {
     let cantidadProducto = parseInt(prompt("Seleccione cantidad"));
-            if (!isNaN(cantidadProducto)&&(cantidadProducto>0)) {
-    carrito += cantidadProducto * precio;
-            alert(
-              `Han sido agregados ${cantidadProducto} ${producto} talle ${talle} $ ${cantidadProducto * precio}`
-            );
-            }
-            else{
-                alert("Error");
-            }
+    if (!isNaN(cantidadProducto) && (cantidadProducto > 0)) {
+      let precioProducto=cantidadProducto * precio
+      Carrito.push(new ProductoVenta(producto, talle, cantidadProducto, precioProducto))
+      alert(
+        `Han sido agregados ${cantidadProducto} ${producto} talle ${talle} $ ${cantidadProducto * precio}`
+      );
+    }
+    else {
+      alert("Error");
+    }
+  }
 }
 while (producto != "COMPRAR") {
-    switch (producto) {
-      case "VESTIDO":
-        talle = seleccionarTalle();
-        if (talle != undefined) {
-            agregarProducto(precioVestido);
-          }
-          break;
-      case "CANCAN":
-        talle = seleccionarTalle();
-        if (talle != undefined) {
-            agregarProducto(precioCancan);
-          }
-          break;
-      case "POLERA":
-        talle = seleccionarTalle();
-        if (talle != undefined) {
-            agregarProducto(precioPolera);
-          }
-          break;
-      case "CONJUNTO":
-        talle = seleccionarTalle();
-        if (talle != undefined) {
-            agregarProducto(precioConjunto);
-          }
-          break;
-      default:
-        alert("Error. Debe seleccionar un producto");
-        break;
-    }
-    producto = prompt(
-      "Seleccione producto: 'Vestido', 'Cancan', 'Polera' o 'Conjunto'. Escriba 'Comprar' para finalizar compra"
-    ).toUpperCase();
+  switch (producto) {
+    case "VESTIDO":
+      agregarProducto(precioVestido);
+      break;
+    case "CANCAN":
+      agregarProducto(precioCancan);
+      break;
+    case "POLERA":
+      agregarProducto(precioPolera);
+      break;
+    case "CONJUNTO":
+      agregarProducto(precioConjunto);
+      break;
+    default:
+      alert("Error. Debe seleccionar un producto");
+      break;
   }
-alert("Total  $ " + carrito);
+  producto = prompt(
+    "Seleccione producto: 'Vestido', 'Cancan', 'Polera' o 'Conjunto'. Escriba 'Comprar' para finalizar compra"
+  ).toUpperCase();
+}
+let carritoTotal=Carrito.reduce((carrito,producto)=>carrito+producto.precio,0);
+alert("Total  $ " + carritoTotal);
+console.table(Carrito);
