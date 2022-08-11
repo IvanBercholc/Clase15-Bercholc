@@ -1,5 +1,6 @@
 "use strict";
 //Tienda online de Rica
+// CONST, CLASS Y ARRAYS
 const precioVestido = 5800;
 const precioCancan = 3400;
 const precioPolera = 2700;
@@ -49,10 +50,7 @@ class ProductoVenta {
       (this.precio = precio);
   }
 }
-busqueda();
-let producto = prompt(
-  "Seleccione producto: 'Vestido', 'Cancan', 'Polera' o 'Conjunto'. Escriba 'Comprar' para finalizar compra"
-).toUpperCase();
+// FUNCIONES
 function busqueda() {
   let busqueda = prompt(
     "Bienvenido a Rica.\nIngrese el nombre del producto para saber el precio:\nVESTIDO\nCANCAN\nPOLERA\nCONJUNTO\nMICROTOP\nREMERA\n'SALIR' para finalizar busqueda"
@@ -128,6 +126,11 @@ function agregarProducto(precio) {
     }
   }
 }
+// PROCESO DE BÚSQUEDA Y COMPRA
+busqueda();
+let producto = prompt(
+  "Seleccione producto: 'Vestido', 'Cancan', 'Polera' o 'Conjunto'. Escriba 'Comprar' para finalizar compra"
+).toUpperCase();
 while (producto != "COMPRAR") {
   switch (producto) {
     case "VESTIDO":
@@ -150,6 +153,7 @@ while (producto != "COMPRAR") {
     "Seleccione producto: 'Vestido', 'Cancan', 'Polera' o 'Conjunto'. Escriba 'Comprar' para finalizar compra"
   ).toUpperCase();
 }
+// RESULTADO Y SALIDA
 let carritoTotal = Carrito.reduce(
   (carrito, producto) => carrito + producto.precio,
   0

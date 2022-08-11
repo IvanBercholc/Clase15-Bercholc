@@ -4,16 +4,135 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Croissant+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">   
     <title>Rica | Tienda Online</title>
+    <link rel="icon" type="image/x-icon" href="./assets/ricaicono.png">
 </head>
-<body>
-    <header>
-        <h1>Rica</h1>
+<body class="grid">
+    <header class="header">
+        <a href=index.html class="animado"><img class="logo" alt="Rica" src="./assets/ricalogo.png" width="80px"></a>
+        <nav class="navDesktop">
+            <ul class="animado">
+                <li><a class="nav__boton" href="#wave">WAVE</a></li>
+                <li><a class="nav__boton" href="#cuin">CUIN</a></li>
+                <li><a class="nav__boton" href="#basics">BASICS</a></li>
+            </ul>
+        </nav>  
+        <input id="busqueda" type="search" placeholder="Buscar..." class="animado">
+        <a href="#" id="carrito" class="animado"><img src="./assets/carrito.png" alt="carrito" width="25px" height="auto"></a>
     </header>
     <main>
-        <h2>Tienda Online de Rica</h2>
-        
+        <h1><strong>Tienda Online de Rica</strong></h1>
+        <hr>
+        <section class="main-productos">
+            <h2 id="wave"><i>Colección Wave</i></h2>
+        <div class="productos"> 
+            <article>
+                <img src="./assets/vestido-wave.jpg" width="250" height="250" alt="vestido wave">
+                <p><strong>Vestido Wave</strong></p>
+                <p>$5.800,00</p>
+                <button type="button" class="btn btn-light">Añadir al carrito</button>            </article>
+            <article>
+                <img src="./assets/cancan-wave.jpg" width="250" height="250" alt="cancan wave">
+                <p><strong>Cancan Wave</strong></p>
+                <p>$3.400,00</p>
+                <button type="button" class="btn btn-light">Añadir al carrito</button>            </article>
+            </article>
+            <article>
+                <img src="./assets/microtop-wave.jpg" width="250" height="250" alt="microtop wave">
+                <p><strong>Microtop Wave</strong></p>
+                <p>$2.400,00</p>
+                <button type="button" class="btn btn-light">Añadir al carrito</button>            </article>
+            </article>
+        </div>
+        <hr>
+        <h2 id="cuin"><i>Colección Cuin</i></h2>
+        <div class="productos">
+            <article>
+                <img src="./assets/polera-cuin-azul.jpg" width="250" height="375" alt="polera cuin azul">
+                <p><strong>Polera Cuin Azul</strong></p>
+                <p>$2.700,00</p>
+                <button type="button" class="btn btn-light">Añadir al carrito</button>            </article>
+            </article>
+            <article>
+                <img src="./assets/cancan-cuin-marron.jpg" width="250" height="375" alt="cancan cuin marron">
+                <p><strong>Cancan Cuin Marrón</strong></p>
+                <p>$3.400,00</p>
+                <button type="button" class="btn btn-light">Añadir al carrito</button>            </article>
+            </article>
+            <article>
+                <img src="./assets/cancan-cuin-azul.jpeg" width="250" height="250" alt="cancan cuin azul">
+                <p><strong>Cancan Cuin Azul</strong></p>
+                <p>$3.400,00</p>
+                <button type="button" class="btn btn-light">Añadir al carrito</button>            </article>
+            </article>
+            <article>
+                <img src="./assets/polera-cuin-marron.jpeg" width="250" height="250" alt="polera cuin marron">
+                <p><strong>Polera Cuin Marrón</strong></p>
+                <p>$2.700,00</p>
+                <button type="button" class="btn btn-light">Añadir al carrito</button>            </article>
+            </article>
+            </div>
+            <hr>
+        <h2 id="basics"><i>Colección Basics</i></h2>
+        <div class="productos">
+            <article>
+                <img src="./assets/cancan-liga-negra.jpg" width="250" height="250" alt="cancan liga negra">
+                <p><strong>Cancan Liga Negra</strong></p>
+                <p>$3.400,00</p>
+                <button type="button" class="btn btn-light">Añadir al carrito</button>            </article>
+            </article>
+            <article>
+                <img src="./assets/polera-oxido-negra.jpg" width="250" height="340" alt="polera oxido negra">
+                <p><strong>Polera Óxido Negra</strong></p>
+                <p>$2.700,00</p>
+                <button type="button" class="btn btn-light">Añadir al carrito</button>            </article>
+            </article>
+            <article>
+                <img src="./assets/cancan-oxido-ocre.jpeg" width="250" height="465" alt="cancan oxido ocre">
+                <p><strong>Cancan Oxido Ocre</strong></p>
+                <p>$3.400,00</p>
+                <button type="button" class="btn btn-light">Añadir al carrito</button>            </article>
+            </article>
+            <article>
+                <img src="./assets/cancan-oxido-negro.jpeg" width="250" height="250" alt="cancan oxido negro">
+                <p><strong>Cancan Oxido Negro</strong></p>
+                <p>$3.400,00</p>
+                <button type="button" class="btn btn-light">Añadir al carrito</button>            </article>
+            </article>
+            <article>
+                <img src="./assets/conjunto-oxido-negro.jpeg" width="250" height="375" alt="conjunto oxido negro">
+                <p><strong>Conjunto Oxido Negro</strong></p>
+                <p>$13.000,00</p>
+                <button type="button" class="btn btn-light">Añadir al carrito</button>            </article>
+            </article>
+        </div>
+        </section>
     </main>
+    <footer class="footer">     
+        <div>
+            <h5>Puntos de venta</h3>
+            <p>Cabildo 3011 8E, Studio PM4, CABA</p>
+            <p>Aguirre 1167, Fortaleza Aguirre, CABA</p>
+            <br class="saltoDeLinea">
+        </div>
+        <div>
+            <h5>Contacto</h5>
+            <p>rica.indumentaria@gmail.com</p>
+            <p>03329570161</p>
+            <p>Terrero 761, 6to B. Caba</p> 
+        </div>
+        <div class="redesMobile">
+            <a href="https://www.instagram.com/rica.com.ar/" target="_blank"><img src="./assets/instagram.png" width="25px" height="auto" alt="instagram"></a>
+            <a href="https://wa.me/1130782402" target="_blank"><img src="./assets/whatsapp.png" width="25px" height="auto" alt="whatsapp"></a>     
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     <script src="js/script.js"></script>
 </body>
 </html>
