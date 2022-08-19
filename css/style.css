@@ -137,6 +137,13 @@ footer {
   .productos article p, .productos h1, .productos h2, .productos h3, .productos h4, .productos h5, .productos h6 {
     line-height: 2;
   }
+  .noDisponible{
+    filter:opacity(25%)
+  }
+  /* CARRITO */
+  .btn-close:active{
+    border-color: black;
+  }
 
   /*ENCABEZADOS*/
   main h1 {

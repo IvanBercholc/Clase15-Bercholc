@@ -24,95 +24,42 @@
             </ul>
         </nav>  
         <input id="busqueda" type="search" placeholder="Buscar..." class="animado">
-        <a href="#" id="carrito" class="animado"><img src="./assets/carrito.png" alt="carrito" width="25px" height="auto"></a>
+        <a href="#" id="icono-carrito" class="animado" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><img src="./assets/carrito.png" alt="carrito" width="25px" height="auto"></a>
     </header>
     <main>
         <h1><strong>Tienda Online de Rica</strong></h1>
         <hr>
         <section class="main-productos">
             <h2 id="wave"><i>Colección Wave</i></h2>
-        <div class="productos"> 
-            <article>
-                <img src="./assets/vestido-wave.jpg" width="250" height="250" alt="vestido wave">
-                <p><strong>Vestido Wave</strong></p>
-                <p>$5.800,00</p>
-                <button type="button" class="btn btn-light">Añadir al carrito</button>            </article>
-            <article>
-                <img src="./assets/cancan-wave.jpg" width="250" height="250" alt="cancan wave">
-                <p><strong>Cancan Wave</strong></p>
-                <p>$3.400,00</p>
-                <button type="button" class="btn btn-light">Añadir al carrito</button>            </article>
-            </article>
-            <article>
-                <img src="./assets/microtop-wave.jpg" width="250" height="250" alt="microtop wave">
-                <p><strong>Microtop Wave</strong></p>
-                <p>$2.400,00</p>
-                <button type="button" class="btn btn-light">Añadir al carrito</button>            </article>
-            </article>
-        </div>
-        <hr>
-        <h2 id="cuin"><i>Colección Cuin</i></h2>
-        <div class="productos">
-            <article>
-                <img src="./assets/polera-cuin-azul.jpg" width="250" height="375" alt="polera cuin azul">
-                <p><strong>Polera Cuin Azul</strong></p>
-                <p>$2.700,00</p>
-                <button type="button" class="btn btn-light">Añadir al carrito</button>            </article>
-            </article>
-            <article>
-                <img src="./assets/cancan-cuin-marron.jpg" width="250" height="375" alt="cancan cuin marron">
-                <p><strong>Cancan Cuin Marrón</strong></p>
-                <p>$3.400,00</p>
-                <button type="button" class="btn btn-light">Añadir al carrito</button>            </article>
-            </article>
-            <article>
-                <img src="./assets/cancan-cuin-azul.jpeg" width="250" height="250" alt="cancan cuin azul">
-                <p><strong>Cancan Cuin Azul</strong></p>
-                <p>$3.400,00</p>
-                <button type="button" class="btn btn-light">Añadir al carrito</button>            </article>
-            </article>
-            <article>
-                <img src="./assets/polera-cuin-marron.jpeg" width="250" height="250" alt="polera cuin marron">
-                <p><strong>Polera Cuin Marrón</strong></p>
-                <p>$2.700,00</p>
-                <button type="button" class="btn btn-light">Añadir al carrito</button>            </article>
-            </article>
+            <div class="productos" id="productosWave"> 
             </div>
             <hr>
-        <h2 id="basics"><i>Colección Basics</i></h2>
-        <div class="productos">
-            <article>
-                <img src="./assets/cancan-liga-negra.jpg" width="250" height="250" alt="cancan liga negra">
-                <p><strong>Cancan Liga Negra</strong></p>
-                <p>$3.400,00</p>
-                <button type="button" class="btn btn-light">Añadir al carrito</button>            </article>
-            </article>
-            <article>
-                <img src="./assets/polera-oxido-negra.jpg" width="250" height="340" alt="polera oxido negra">
-                <p><strong>Polera Óxido Negra</strong></p>
-                <p>$2.700,00</p>
-                <button type="button" class="btn btn-light">Añadir al carrito</button>            </article>
-            </article>
-            <article>
-                <img src="./assets/cancan-oxido-ocre.jpeg" width="250" height="465" alt="cancan oxido ocre">
-                <p><strong>Cancan Oxido Ocre</strong></p>
-                <p>$3.400,00</p>
-                <button type="button" class="btn btn-light">Añadir al carrito</button>            </article>
-            </article>
-            <article>
-                <img src="./assets/cancan-oxido-negro.jpeg" width="250" height="250" alt="cancan oxido negro">
-                <p><strong>Cancan Oxido Negro</strong></p>
-                <p>$3.400,00</p>
-                <button type="button" class="btn btn-light">Añadir al carrito</button>            </article>
-            </article>
-            <article>
-                <img src="./assets/conjunto-oxido-negro.jpeg" width="250" height="375" alt="conjunto oxido negro">
-                <p><strong>Conjunto Oxido Negro</strong></p>
-                <p>$13.000,00</p>
-                <button type="button" class="btn btn-light">Añadir al carrito</button>            </article>
-            </article>
-        </div>
+            <h2 id="cuin"><i>Colección Cuin</i></h2>
+            <div class="productos" id="productosCuin">
+            </div>
+            <hr>
+            <h2 id="basics"><i>Colección Basics</i></h2>
+            <div class="productos" id="productosBasics">
+            </div>
         </section>
+
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header" style="background-color: black">
+                  <h5 class="modal-title" style="color:white" id="staticBackdropLabel">Mi Carrito</h5>
+                  <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="carrito">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
     </main>
     <footer class="footer">     
         <div>
