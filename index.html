@@ -23,10 +23,11 @@
                 <li><a class="nav__boton" href="#basics">BASICS</a></li>
             </ul>
         </nav>  
-        <input id="busqueda" type="search" placeholder="Buscar..." class="animado">
+        <!-- <input id="busqueda" type="search" placeholder="Buscar..." class="animado"> -->
         <a href="#" id="icono-carrito" class="animado" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><img src="./assets/carrito.png" alt="carrito" width="25px" height="auto"></a>
     </header>
     <main>
+        <img src="./assets/horizontal-wave.jpg" id="mainFoto">
         <h1><strong>Tienda Online de Rica</strong></h1>
         <hr>
         <section class="main-productos">
@@ -50,9 +51,24 @@
                   <h5 class="modal-title" style="color:white" id="staticBackdropLabel">Mi Carrito</h5>
                   <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body" id="carrito">
+                <div class="modal-body" id="divCarrito">
+                    <table class="table table-hover">
+                        <thead>
+                            <th scope="col">Producto</th>
+                            <th scope="col">Precio</th>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">Total</th>
+                        </thead>
+                        <tbody id="carrito">
+                            <td colspan="4">Carrito vacío</td>
+                        </tbody>
+                        <tfoot>
+                            <th colspan="3">Total</th>
+                        </tfoot>
+                    </table>
                 </div>
                 <div class="modal-footer">
+                    <button type="button" class="btn btn-light"><strong>Ir a Pagar</strong></button>
                   <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cerrar</button>
                 </div>
               </div>

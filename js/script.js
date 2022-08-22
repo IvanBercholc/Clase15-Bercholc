@@ -163,65 +163,79 @@ const productosWave = document.getElementById("productosWave");
 const productosCuin = document.getElementById("productosCuin");
 const productosBasics = document.getElementById("productosBasics");
 
-listaProductos.forEach((producto) => {
-  let articulo = document.createElement("article");
-  let imagen = document.createElement("img");
-  imagen.src = producto.foto;
-  imagen.alt = producto.nombre;
-  imagen.style = "width: 250px";
-  let texto = document.createElement("div");
-  let boton = document.createElement("button");
-  boton.id = `${producto.codigo}`;
-  boton.innerText = "Agregar al Carrito";
-  boton.className = "btn btn-light";
-  boton.onclick = () => {
-    let productoCarrito = new ProductoCarrito(producto, 1);
-    Carrito.push(productoCarrito);
-    console.log(Carrito);
-    let carrito = document.getElementById("carrito");
-    for (const producto of Carrito) {
-      let tabla = document.createElement("tbody");
-      let articulo = document.createElement("tr");
-      articulo.innerHTML += `<td>${producto.producto.nombre}</td>
-  <td>${new Intl.NumberFormat("en-US", {
+const divCarrito=document.getElementById("divCarrito");
+const carritoCompras = document.getElementById("carrito");
+
+catalogo();
+
+function moneda(numero){
+  return new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
     minimumFractionDigits: 2,
-  }).format(producto.producto.precio)}</td>
-  <td><input type="number" style="width:40px; margin:5px" min="1" value="1"></td>`;
-      tabla.append(articulo);
-      carrito.append(tabla);
+  }).format(numero);
+}
+
+function carrito() {
+  let renglonesCarrito = "";
+  Carrito.forEach((elemento) => {
+    renglonesCarrito += `
+    <tr>
+    <td>${elemento.producto.nombre}</td>
+    <td>${moneda(elemento.producto.precio)}</td>
+    <td>${elemento.cantidad}</td>
+    <td>${moneda(elemento.producto.precio * elemento.cantidad)}</td>
+    </tr>`;
+  });
+  carritoCompras.innerHTML=renglonesCarrito;
+}
+
+function catalogo() {
+  listaProductos.forEach((producto) => {
+    let articulo = document.createElement("article");
+    let imagen = document.createElement("img");
+    imagen.src = producto.foto;
+    imagen.alt = producto.nombre;
+    imagen.style = "width: 250px";
+    let texto = document.createElement("div");
+    let boton = document.createElement("button");
+    boton.id = `${producto.codigo}`;
+    boton.innerText = "Agregar al Carrito";
+    boton.className = "btn btn-light";
+    boton.onclick = () => {
+      if (producto.disponible == true) {
+        let productoCarrito = new ProductoCarrito(producto, 1);
+        Carrito.push(productoCarrito);
+        carrito();
+      }
+    };
+    texto.innerHTML = `<p><strong> ${producto.nombre} </strong></p>
+  <p>${moneda(producto.precio)}</p>`;
+    articulo.append(imagen);
+    articulo.append(texto);
+    articulo.append(boton);
+    if (producto.coleccion == "Wave") {
+      productosWave.append(articulo);
     }
-  };
-  texto.innerHTML = `<p><strong> ${producto.nombre} </strong></p>
-  <p>${new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-    minimumFractionDigits: 2,
-  }).format(producto.precio)}</p>`;
-  articulo.append(imagen);
-  articulo.append(texto);
-  articulo.append(boton);
-  if (producto.coleccion == "Wave") {
-    productosWave.append(articulo);
-  }
-  if (producto.coleccion == "Cuin") {
-    productosCuin.append(articulo);
-  }
-  if (producto.coleccion == "Basics") {
-    productosBasics.append(articulo);
-  }
-  if (producto.disponible == false) {
-    imagen.className = "noDisponible";
-    texto.className = "noDisponible";
-    let textoNoDisponible = document.createElement("strong");
-    textoNoDisponible.innerText = "SIN STOCK";
-    articulo.style = "position:relative";
-    textoNoDisponible.style =
-      "position:absolute; top:40%; left:50% ; transform: translate(-50%,-50%)";
-    articulo.append(textoNoDisponible);
-  }
-});
+    if (producto.coleccion == "Cuin") {
+      productosCuin.append(articulo);
+    }
+    if (producto.coleccion == "Basics") {
+      productosBasics.append(articulo);
+    }
+    if (producto.disponible == false) {
+      imagen.className = "noDisponible";
+      texto.className = "noDisponible";
+      let textoNoDisponible = document.createElement("strong");
+      textoNoDisponible.innerText = "SIN STOCK";
+      articulo.style = "position:relative";
+      textoNoDisponible.style =
+        "position:absolute; top:40%; left:50% ; transform: translate(-50%,-50%)";
+      articulo.append(textoNoDisponible);
+    }
+  });
+}
+console.log(Carrito);
 
 //
 //
