@@ -151,7 +151,7 @@ listaProductos.push(
 );
 console.log(listaProductos);
 
-const Carrito = [];
+let Carrito = [];
 class ProductoCarrito {
   constructor(producto, cantidad) {
     (this.producto = producto), (this.cantidad = cantidad);
@@ -163,12 +163,17 @@ const productosWave = document.getElementById("productosWave");
 const productosCuin = document.getElementById("productosCuin");
 const productosBasics = document.getElementById("productosBasics");
 
-const divCarrito=document.getElementById("divCarrito");
 const carritoCompras = document.getElementById("carrito");
+const carritoTotal = document.getElementById("carritoTotal");
+
+if(localStorage.getItem("carrito"!=null)){
+  Carrito=JSON.parse(localStorage.getItem("carrito"));
+  carrito();
+}
 
 catalogo();
 
-function moneda(numero){
+function moneda(numero) {
   return new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
@@ -177,17 +182,37 @@ function moneda(numero){
 }
 
 function carrito() {
-  let renglonesCarrito = "";
+  let sumaCarrito = 0;
+  carritoCompras.innerHTML = "";
   Carrito.forEach((elemento) => {
-    renglonesCarrito += `
-    <tr>
+    let articulosCarrito = document.createElement("tr");
+    articulosCarrito.innerHTML = `
     <td>${elemento.producto.nombre}</td>
     <td>${moneda(elemento.producto.precio)}</td>
-    <td>${elemento.cantidad}</td>
+    <td><input type="number" min="1" step="1" max="100" id="carrito-cantidad-${
+      elemento.producto.codigo
+    }" value="${parseInt(elemento.cantidad)}" style="width:40px"/></td>
     <td>${moneda(elemento.producto.precio * elemento.cantidad)}</td>
-    </tr>`;
+    `;
+
+    carritoCompras.append(articulosCarrito);
+
+    sumaCarrito += elemento.producto.precio * elemento.cantidad;
+
+    if (Carrito.length > 0) {
+      carritoTotal.innerHTML = `<th colspan="4"> Total de la compra ${moneda(
+        sumaCarrito
+      )}</th>`;
+    }
+
+    let cantidadProducto = document.getElementById(`carrito-cantidad-${elemento.producto.codigo}`);
+    cantidadProducto.addEventListener("change", (e) => {
+      let nuevaCantidad = parseInt(e.target.value);
+      elemento.cantidad = nuevaCantidad;
+      carrito();
+      localStorage.setItem("carrito", JSON.stringify(Carrito));
+    });
   });
-  carritoCompras.innerHTML=renglonesCarrito;
 }
 
 function catalogo() {
@@ -204,9 +229,25 @@ function catalogo() {
     boton.className = "btn btn-light";
     boton.onclick = () => {
       if (producto.disponible == true) {
-        let productoCarrito = new ProductoCarrito(producto, 1);
-        Carrito.push(productoCarrito);
-        carrito();
+        let elementoExistente = Carrito.find(
+          (elemento) => elemento.producto.codigo == producto.codigo
+        );
+
+        if (elementoExistente) {
+          elementoExistente.cantidad += 1;
+          carrito();
+          alert("Se ha agregado otro "+producto.nombre+" al carrito")
+          localStorage.setItem("carrito", JSON.stringify(Carrito));
+        } else {
+          let productoCarrito = new ProductoCarrito(producto, 1);
+          Carrito.push(productoCarrito);
+          carrito();
+          alert("Se ha agregado "+producto.nombre+" al carrito");
+          localStorage.setItem("carrito", JSON.stringify(Carrito));
+        }
+      }
+      else{
+        alert(producto.nombre+" no se encuentra en Stock")
       }
     };
     texto.innerHTML = `<p><strong> ${producto.nombre} </strong></p>
@@ -236,116 +277,3 @@ function catalogo() {
   });
 }
 console.log(Carrito);
-
-//
-//
-// ---PROCESO ANTERIOR---
-// function busqueda() {
-//   let busqueda = prompt(
-//     "Bienvenido a Rica.\nIngrese el nombre del producto para saber el precio:\nVESTIDO\nCANCAN\nPOLERA\nCONJUNTO\nMICROTOP\nREMERA\n'SALIR' para finalizar busqueda"
-//   ).toUpperCase();
-//   while (busqueda != "SALIR") {
-//     let productoEncontrado = listaProductos.find(
-//       (producto) => producto.nombre == busqueda
-//     );
-//     if (
-//       productoEncontrado != undefined &&
-//       productoEncontrado.disponible == true
-//     ) {
-//       alert(
-//         "Se ha encontrado " +
-//           productoEncontrado.nombre +
-//           ", tiene un precio de $ " +
-//           productoEncontrado.precio
-//       );
-//     } else if (
-//       productoEncontrado != undefined &&
-//       productoEncontrado.disponible == false
-//     ) {
-//       alert(
-//         "El producto " +
-//           productoEncontrado.nombre +
-//           " actualmente no se encuentra en stock"
-//       );
-//     } else {
-//       alert("No se ha encontrado ningún producto");
-//     }
-//     busqueda = prompt(
-//       "Bienvenido a Rica.\nIngrese el nombre del producto para saber el precio:\nVESTIDO\nCANCAN\nPOLERA\nCONJUNTO\nMICROTOP\nREMERA\n'SALIR' para finalizar busqueda"
-//     ).toUpperCase();
-//   }
-//   alert("Elija lo que mas le guste!");
-// }
-// function seleccionarTalle() {
-//   let talle = prompt(
-//     "Seleccione talle: 'S', 'M' o 'L'. 'Cancelar' para salir"
-//   ).toUpperCase();
-//   while (talle != "CANCELAR") {
-//     switch (talle) {
-//       case "S":
-//         return talle;
-//       case "M":
-//         return talle;
-//       case "L":
-//         return talle;
-//       default:
-//         alert("Error. Debe seleccionar un talle");
-//     }
-//     talle = prompt(
-//       "Seleccione talle: 'S', 'M' o 'L'. 'Cancelar' para salir"
-//     ).toUpperCase();
-//   }
-// }
-// function agregarProducto(precio) {
-//   let talle = seleccionarTalle();
-//   if (talle != undefined) {
-//     let cantidadProducto = parseInt(prompt("Seleccione cantidad"));
-//     if (!isNaN(cantidadProducto) && cantidadProducto > 0) {
-//       let precioProducto = cantidadProducto * precio;
-//       Carrito.push(
-//         new ProductoVenta(producto, talle, cantidadProducto, precioProducto)
-//       );
-//       alert(
-//         `Han sido agregados ${cantidadProducto} ${producto} talle ${talle} $ ${
-//           cantidadProducto * precio
-//         }`
-//       );
-//     } else {
-//       alert("Error");
-//     }
-//   }
-// }
-// // PROCESO DE BÚSQUEDA Y COMPRA
-// busqueda();
-// let producto = prompt(
-//   "Seleccione producto: 'Vestido', 'Cancan', 'Polera' o 'Conjunto'. Escriba 'Comprar' para finalizar compra"
-// ).toUpperCase();
-// while (producto != "COMPRAR") {
-//   switch (producto) {
-//     case "VESTIDO":
-//       agregarProducto(precioVestido);
-//       break;
-//     case "CANCAN":
-//       agregarProducto(precioCancan);
-//       break;
-//     case "POLERA":
-//       agregarProducto(precioPolera);
-//       break;
-//     case "CONJUNTO":
-//       agregarProducto(precioConjunto);
-//       break;
-//     default:
-//       alert("Error. Debe seleccionar un producto");
-//       break;
-//   }
-//   producto = prompt(
-//     "Seleccione producto: 'Vestido', 'Cancan', 'Polera' o 'Conjunto'. Escriba 'Comprar' para finalizar compra"
-//   ).toUpperCase();
-// }
-// // RESULTADO Y SALIDA
-// let carritoTotal = Carrito.reduce(
-//   (carrito, producto) => carrito + producto.precio,
-//   0
-// );
-// alert("Total  $ " + carritoTotal);
-// console.table(Carrito);
