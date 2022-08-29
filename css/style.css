@@ -163,3 +163,8 @@ footer {
   .nav__boton, .burger_boton {
     font-family: "Croissant One", cursive;
   }
+
+  .boton-delete-carrito {
+    cursor: pointer;
+    margin-top: -5px;
+  }
