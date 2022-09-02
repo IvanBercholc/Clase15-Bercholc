@@ -151,7 +151,8 @@ listaProductos.push(
 );
 console.log(listaProductos);
 
-let Carrito = [];
+let Carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
 class ProductoCarrito {
   constructor(producto, cantidad) {
     (this.producto = producto), (this.cantidad = cantidad);
@@ -166,12 +167,8 @@ const productosBasics = document.getElementById("productosBasics");
 const carritoCompras = document.getElementById("carrito");
 const carritoTotal = document.getElementById("carritoTotal");
 
-if(localStorage.getItem("carrito"!=null)){
-  Carrito=JSON.parse(localStorage.getItem("carrito"));
-  carrito();
-}
-
 catalogo();
+carrito();
 
 function moneda(numero) {
   return new Intl.NumberFormat("en-US", {
@@ -193,14 +190,18 @@ function carrito() {
       elemento.producto.codigo
     }" value="${parseInt(elemento.cantidad)}" style="width:40px"/></td>
     <td>${moneda(elemento.producto.precio * elemento.cantidad)}</td>
-    <td><img src="./assets/delete.png" class="boton-delete-carrito" id="borrar-producto-${elemento.producto.codigo}"></td>
+    <td><img src="./assets/delete.png" class="boton-delete-carrito" id="borrar-producto-${
+      elemento.producto.codigo
+    }"></td>
     `;
 
     carritoCompras.append(articulosCarrito);
 
     sumaCarrito += elemento.producto.precio * elemento.cantidad;
 
-    let cantidadProducto = document.getElementById(`carrito-cantidad-${elemento.producto.codigo}`);
+    let cantidadProducto = document.getElementById(
+      `carrito-cantidad-${elemento.producto.codigo}`
+    );
     cantidadProducto.addEventListener("change", (e) => {
       let nuevaCantidad = parseInt(e.target.value);
       elemento.cantidad = nuevaCantidad;
@@ -208,29 +209,29 @@ function carrito() {
       localStorage.setItem("carrito", JSON.stringify(Carrito));
     });
 
-    let borrarProducto = document.getElementById(`borrar-producto-${elemento.producto.codigo}`);
+    let borrarProducto = document.getElementById(
+      `borrar-producto-${elemento.producto.codigo}`
+    );
     borrarProducto.addEventListener("click", () => {
       eliminarProducto(elemento);
       carrito();
       localStorage.setItem("carrito", JSON.stringify(Carrito));
-    })
+    });
   });
 
-  if(Carrito.length>0){
-    carritoTotal.innerHTML = `<th colspan="4"> Total de la compra ${moneda(
-      sumaCarrito
-    )}</th>`;
-  }
-  else {
-    carritoTotal.innerHTML = `<th colspan="4">Carrito vacío</th>`;
-  }
-
+  Carrito.length > 0
+    ? (carritoTotal.innerHTML = `<th colspan="4"> Total de la compra ${moneda(
+        sumaCarrito
+      )}</th>`)
+    : (carritoTotal.innerHTML = `<th colspan="4">Carrito vacío</th>`);
 }
 
 function eliminarProducto(productoEliminar) {
-  let productosMantener = Carrito.filter((elemento) => productoEliminar.producto.codigo != elemento.producto.codigo);
-  Carrito.length=0;
-  productosMantener.forEach((elemento)=> Carrito.push(elemento));
+  let productosMantener = Carrito.filter(
+    (elemento) => productoEliminar.producto.codigo != elemento.producto.codigo
+  );
+  Carrito.length = 0;
+  productosMantener.forEach((elemento) => Carrito.push(elemento));
 }
 
 function catalogo() {
@@ -254,18 +255,29 @@ function catalogo() {
         if (elementoExistente) {
           elementoExistente.cantidad += 1;
           carrito();
-          alert("Se ha agregado otro "+producto.nombre+" al carrito")
+          Swal.fire(
+            producto.nombre,
+            'Se ha agregado al carrito!',
+            'success'
+          )
           localStorage.setItem("carrito", JSON.stringify(Carrito));
         } else {
           let productoCarrito = new ProductoCarrito(producto, 1);
           Carrito.push(productoCarrito);
           carrito();
-          alert("Se ha agregado "+producto.nombre+" al carrito");
+          Swal.fire(
+            producto.nombre,
+            'Se ha agregado al carrito!',
+            'success'
+          )
           localStorage.setItem("carrito", JSON.stringify(Carrito));
         }
-      }
-      else{
-        alert(producto.nombre+" no se encuentra en Stock")
+      } else {
+        Swal.fire(
+          producto.nombre,
+          'No se encuentra en Stock',
+          'error'
+        )
       }
     };
     texto.innerHTML = `<p><strong> ${producto.nombre} </strong></p>
