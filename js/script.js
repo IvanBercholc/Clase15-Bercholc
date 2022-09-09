@@ -1,155 +1,4 @@
 "use strict";
-//TIENDA ONLINE DE RICA
-// Listas de Precios y Productos
-const precioVestido = 5800;
-const precioCancan = 3400;
-const precioPolera = 2700;
-const precioConjunto = 13000;
-const precioMicrotop = 2400;
-const listaProductos = [];
-class Productos {
-  constructor(nombre, disponible, precio, foto, coleccion, codigo) {
-    (this.nombre = nombre),
-      (this.disponible = disponible),
-      (this.precio = precio),
-      (this.foto = foto),
-      (this.coleccion = coleccion),
-      (this.codigo = codigo);
-  }
-  habilitar() {
-    if (this.disponible == false) {
-      this.disponible = true;
-    } else {
-      console.log("Error. Producto disponible");
-    }
-  }
-  deshabilitar() {
-    if (this.disponible == true) {
-      this.disponible = false;
-    } else {
-      console.log("Error. Producto no disponible");
-    }
-  }
-  modificarPrecio(nuevoPrecio) {
-    if (!isNaN(nuevoPrecio)) {
-      this.precio = nuevoPrecio;
-    } else {
-      console.log("Error al modificar precio de producto");
-    }
-  }
-}
-const vestidoWave = new Productos(
-  "Vestido Wave",
-  true,
-  precioVestido,
-  "./assets/vestido-wave.jpg",
-  "Wave",
-  1
-);
-const cancanWave = new Productos(
-  "Cancan Wave",
-  true,
-  precioCancan,
-  "./assets/cancan-wave.jpg",
-  "Wave",
-  2
-);
-const microtopWave = new Productos(
-  "Microtop Wave",
-  false,
-  precioMicrotop,
-  "./assets/microtop-wave.jpg",
-  "Wave",
-  3
-);
-const poleraCuinAzul = new Productos(
-  "Polera Cuin Azul",
-  true,
-  precioPolera,
-  "./assets/polera-cuin-azul.jpg",
-  "Cuin",
-  4
-);
-const cancanCuinMarron = new Productos(
-  "Cancan Cuin Marron",
-  true,
-  precioCancan,
-  "./assets/cancan-cuin-marron.jpg",
-  "Cuin",
-  5
-);
-const cancanCuinAzul = new Productos(
-  "Cancan Cuin Azul",
-  true,
-  precioCancan,
-  "./assets/cancan-cuin-azul.jpeg",
-  "Cuin",
-  6
-);
-const poleraCuinMarron = new Productos(
-  "Polera Cuin Marron",
-  false,
-  precioPolera,
-  "./assets/polera-cuin-marron.jpeg",
-  "Cuin",
-  7
-);
-const cancanLigaNegra = new Productos(
-  "Cancan Liga Negra",
-  true,
-  precioCancan,
-  "./assets/cancan-liga-negra.jpg",
-  "Basics",
-  8
-);
-const poleraOxidoNegra = new Productos(
-  "Polera Oxido Negra",
-  false,
-  precioPolera,
-  "./assets/polera-oxido-negra.jpg",
-  "Basics",
-  9
-);
-const cancanOxidoOcre = new Productos(
-  "Cancan Oxido Ocre",
-  true,
-  precioCancan,
-  "./assets/cancan-oxido-ocre.jpeg",
-  "Basics",
-  10
-);
-const cancanOxidoNegra = new Productos(
-  "Cancan Oxido Negra",
-  true,
-  precioCancan,
-  "./assets/cancan-oxido-negro.jpeg",
-  "Basics",
-  11
-);
-const conjuntoOxidoNegro = new Productos(
-  "Conjunto Oxido Negro",
-  true,
-  precioConjunto,
-  "./assets/conjunto-oxido-negro.jpeg",
-  "Basics",
-  12
-);
-
-listaProductos.push(
-  vestidoWave,
-  cancanWave,
-  microtopWave,
-  poleraCuinAzul,
-  cancanCuinMarron,
-  cancanCuinAzul,
-  poleraCuinMarron,
-  cancanLigaNegra,
-  poleraOxidoNegra,
-  cancanOxidoOcre,
-  cancanOxidoNegra,
-  conjuntoOxidoNegro
-);
-console.log(listaProductos);
 
 let Carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
@@ -159,7 +8,6 @@ class ProductoCarrito {
   }
 }
 
-// Carga de Productos
 const productosWave = document.getElementById("productosWave");
 const productosCuin = document.getElementById("productosCuin");
 const productosBasics = document.getElementById("productosBasics");
@@ -235,75 +83,75 @@ function eliminarProducto(productoEliminar) {
 }
 
 function catalogo() {
-  listaProductos.forEach((producto) => {
-    let articulo = document.createElement("article");
-    let imagen = document.createElement("img");
-    imagen.src = producto.foto;
-    imagen.alt = producto.nombre;
-    imagen.style = "width: 250px";
-    let texto = document.createElement("div");
-    let boton = document.createElement("button");
-    boton.id = `${producto.codigo}`;
-    boton.innerText = "Agregar al Carrito";
-    boton.className = "btn btn-light";
-    boton.onclick = () => {
-      if (producto.disponible == true) {
-        let elementoExistente = Carrito.find(
-          (elemento) => elemento.producto.codigo == producto.codigo
-        );
+  fetch("js/stock.json")
+    .then((respuesta) => respuesta.json())
+    .then((data) =>
+      data.stock.forEach((producto) => {
+        let articulo = document.createElement("article");
+        let imagen = document.createElement("img");
+        imagen.src = producto.foto;
+        imagen.alt = producto.nombre;
+        imagen.style = "width: 250px";
+        let texto = document.createElement("div");
+        let boton = document.createElement("button");
+        boton.id = `${producto.codigo}`;
+        boton.innerText = "Agregar al Carrito";
+        boton.className = "btn btn-light";
+        boton.onclick = () => {
+          if (producto.disponible == true) {
+            let elementoExistente = Carrito.find(
+              (elemento) => elemento.producto.codigo == producto.codigo
+            );
 
-        if (elementoExistente) {
-          elementoExistente.cantidad += 1;
-          carrito();
-          Swal.fire(
-            producto.nombre,
-            'Se ha agregado al carrito!',
-            'success'
-          )
-          localStorage.setItem("carrito", JSON.stringify(Carrito));
-        } else {
-          let productoCarrito = new ProductoCarrito(producto, 1);
-          Carrito.push(productoCarrito);
-          carrito();
-          Swal.fire(
-            producto.nombre,
-            'Se ha agregado al carrito!',
-            'success'
-          )
-          localStorage.setItem("carrito", JSON.stringify(Carrito));
-        }
-      } else {
-        Swal.fire(
-          producto.nombre,
-          'No se encuentra en Stock',
-          'error'
-        )
-      }
-    };
-    texto.innerHTML = `<p><strong> ${producto.nombre} </strong></p>
+            if (elementoExistente) {
+              elementoExistente.cantidad += 1;
+              carrito();
+              Swal.fire(
+                producto.nombre,
+                "Se ha agregado al carrito!",
+                "success"
+              );
+              localStorage.setItem("carrito", JSON.stringify(Carrito));
+            } else {
+              let productoCarrito = new ProductoCarrito(producto, 1);
+              Carrito.push(productoCarrito);
+              carrito();
+              Swal.fire(
+                producto.nombre,
+                "Se ha agregado al carrito!",
+                "success"
+              );
+              localStorage.setItem("carrito", JSON.stringify(Carrito));
+            }
+          } else {
+            Swal.fire(producto.nombre, "No se encuentra en Stock", "error");
+          }
+        };
+        texto.innerHTML = `<p><strong> ${producto.nombre} </strong></p>
   <p>${moneda(producto.precio)}</p>`;
-    articulo.append(imagen);
-    articulo.append(texto);
-    articulo.append(boton);
-    if (producto.coleccion == "Wave") {
-      productosWave.append(articulo);
-    }
-    if (producto.coleccion == "Cuin") {
-      productosCuin.append(articulo);
-    }
-    if (producto.coleccion == "Basics") {
-      productosBasics.append(articulo);
-    }
-    if (producto.disponible == false) {
-      imagen.className = "noDisponible";
-      texto.className = "noDisponible";
-      let textoNoDisponible = document.createElement("strong");
-      textoNoDisponible.innerText = "SIN STOCK";
-      articulo.style = "position:relative";
-      textoNoDisponible.style =
-        "position:absolute; top:40%; left:50% ; transform: translate(-50%,-50%)";
-      articulo.append(textoNoDisponible);
-    }
-  });
+        articulo.append(imagen);
+        articulo.append(texto);
+        articulo.append(boton);
+        if (producto.coleccion == "Wave") {
+          productosWave.append(articulo);
+        }
+        if (producto.coleccion == "Cuin") {
+          productosCuin.append(articulo);
+        }
+        if (producto.coleccion == "Basics") {
+          productosBasics.append(articulo);
+        }
+        if (producto.disponible == false) {
+          imagen.className = "noDisponible";
+          texto.className = "noDisponible";
+          let textoNoDisponible = document.createElement("strong");
+          textoNoDisponible.innerText = "SIN STOCK";
+          articulo.style = "position:relative";
+          textoNoDisponible.style =
+            "position:absolute; top:40%; left:50% ; transform: translate(-50%,-50%)";
+          articulo.append(textoNoDisponible);
+        }
+      })
+    );
 }
 console.log(Carrito);

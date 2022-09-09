@@ -1,0 +1,100 @@
+{
+  "stock": [
+    {
+      "nombre": "Vestido Wave",
+      "disponible": true,
+      "precio": 5800,
+      "foto": "./assets/vestido-wave.jpg",
+      "coleccion": "Wave",
+      "codigo": 1
+    },
+    {
+      "nombre": "Cancan Wave",
+      "disponible": true,
+      "precio": 3400,
+      "foto": "./assets/cancan-wave.jpg",
+      "coleccion": "Wave",
+      "codigo": 2
+    },
+    {
+      "nombre": "Microtop Wave",
+      "disponible": false,
+      "precio": 2400,
+      "foto": "./assets/microtop-wave.jpg",
+      "coleccion": "Wave",
+      "codigo": 3
+    },
+    {
+      "nombre": "Polera Cuin Azul",
+      "disponible": true,
+      "precio": 2700,
+      "foto": "./assets/polera-cuin-azul.jpg",
+      "coleccion": "Cuin",
+      "codigo": 4
+    },
+    {
+      "nombre": "Cancan Cuin Marron",
+      "disponible": true,
+      "precio": 3400,
+      "foto": "./assets/cancan-cuin-marron.jpg",
+      "coleccion": "Cuin",
+      "codigo": 5
+    },
+    {
+      "nombre": "Cancan Cuin Azul",
+      "disponible": true,
+      "precio": 3400,
+      "foto": "./assets/cancan-cuin-azul.jpeg",
+      "coleccion": "Cuin",
+      "codigo": 6
+    },
+    {
+      "nombre": "Polera Cuin Marron",
+      "disponible": true,
+      "precio": 2700,
+      "foto": "./assets/polera-cuin-marron.jpeg",
+      "coleccion": "Cuin",
+      "codigo": 7
+    },
+    {
+      "nombre": "Cancan Liga Negra",
+      "disponible": true,
+      "precio": 3400,
+      "foto": "./assets/cancan-liga-negra.jpg",
+      "coleccion": "Basics",
+      "codigo": 8
+    },
+    {
+      "nombre": "Polera Oxido Negra",
+      "disponible": false,
+      "precio": 2700,
+      "foto": "./assets/polera-oxido-negra.jpg",
+      "coleccion": "Basics",
+      "codigo": 9
+    },
+    {
+      "nombre": "Cancan Oxido Ocre",
+      "disponible": true,
+      "precio": 3400,
+      "foto": "./assets/cancan-oxido-ocre.jpeg",
+      "coleccion": "Basics",
+      "codigo": 10
+    },
+    {
+      "nombre": "Cancan Oxido Negra",
+      "disponible": true,
+      "precio": 3400,
+      "foto": "./assets/cancan-oxido-negro.jpeg",
+      "coleccion": "Basics",
+      "codigo": 11
+    },
+    {
+      "nombre": "Conjunto Oxido Negro",
+      "disponible": true,
+      "precio": 13000,
+      "foto": "./assets/conjunto-oxido-negro.jpeg",
+      "coleccion": "Basics",
+      "codigo": 12
+    }
+  ]
+}
