@@ -14,6 +14,7 @@ const productosBasics = document.getElementById("productosBasics");
 
 const carritoCompras = document.getElementById("carrito");
 const carritoTotal = document.getElementById("carritoTotal");
+const botonComprar = document.getElementById("btn-comprar");
 
 catalogo();
 carrito();
@@ -72,6 +73,18 @@ function carrito() {
         sumaCarrito
       )}</th>`)
     : (carritoTotal.innerHTML = `<th colspan="4">Carrito vacío</th>`);
+
+  botonComprar.onclick = () => {
+    Swal.fire({
+      title: "Tu pedido se está preparando!!!",
+      text: "Que lo disfrutes!",
+      imageUrl:
+        "https://www.abc.es/xlsemanal/wp-content/uploads/sites/5/2022/06/emoticono-cara-contenta-smiley.jpg",
+      imageWidth: 200,
+      imageHeight: 200,
+      imageAlt: "Pedido en preparación",
+    });
+  };
 }
 
 function eliminarProducto(productoEliminar) {
@@ -80,6 +93,7 @@ function eliminarProducto(productoEliminar) {
   );
   Carrito.length = 0;
   productosMantener.forEach((elemento) => Carrito.push(elemento));
+  Swal.fire(productoEliminar.producto.nombre, "Se ha eliminado del carrito");
 }
 
 function catalogo() {
